@@ -8,8 +8,8 @@ cmake_minimum_required(VERSION 3.2.0)
 project(vitasdk)
 
 # Use the following gcc version
-set(GCC_VERSION 10.3.0)
-set(GCC_HASH SHA256=64f404c1a650f27fc33da242e1f2df54952e3963a49e06e73f6940f3223ac344)
+set(GCC_VERSION 11.1.0)
+set(GCC_HASH SHA256=4C4A6FB8A8396059241C2E674B85B351C26A5D678274007F076957AFA1CC9DDF)
 
 set(ZLIB_VERSION 1.2.11)
 set(ZLIB_HASH SHA256=4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066)
@@ -17,29 +17,29 @@ set(ZLIB_HASH SHA256=4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19
 set(LIBELF_VERSION 0.8.13)
 set(LIBELF_HASH SHA256=591a9b4ec81c1f2042a97aa60564e0cb79d041c52faa7416acb38bc95bd2c76d)
 
-set(LIBYAML_VERSION 0.2.2)
-set(LIBYAML_HASH SHA256=4a9100ab61047fd9bd395bcef3ce5403365cafd55c1e0d0299cde14958e47be9)
+set(LIBYAML_VERSION 0.2.5)
+set(LIBYAML_HASH SHA256=C642AE9B75FEE120B2D96C712538BD2CF283228D2337DF2CF2988E3C02678EF4)
 
-set(GMP_VERSION 6.1.2)
-set(GMP_HASH SHA256=5275bb04f4863a13516b2f39392ac5e272f5e1bb8057b18aec1c9b79d73d8fb2)
+set(GMP_VERSION 6.2.1)
+set(GMP_HASH SHA256=FD4829912CDDD12F84181C3451CC752BE224643E87FAC497B69EDDDADC49B4F2)
 
-set(MPFR_VERSION 4.0.2)
-set(MPFR_HASH SHA256=c05e3f02d09e0e9019384cdd58e0f19c64e6db1fd6f5ecf77b4b1c61ca253acc)
+set(MPFR_VERSION 4.1.0)
+set(MPFR_HASH SHA256=0C98A3F1732FF6CA4EA690552079DA9C597872D30E96EC28414EE23C95558A7F)
 
-set(MPC_VERSION 1.1.0)
-set(MPC_HASH SHA256=6985c538143c1208dcb1ac42cedad6ff52e267b47e5f970183a3e75125b43c2e)
+set(MPC_VERSION 1.2.1)
+set(MPC_HASH SHA256=17503D2C395DFCF106B622DC142683C1199431D095367C6AACBA6EEC30340459)
 
-set(ISL_VERSION 0.21)
-set(ISL_HASH SHA256=777058852a3db9500954361e294881214f6ecd4b594c00da5eee974cd6a54960)
+set(ISL_VERSION 0.24)
+set(ISL_HASH SHA256=043105CC544F416B48736FFF8CAF077FB0663A717D06B1113F16E391AC99EBAD)
 
-set(EXPAT_VERSION 2.3.0)
-set(EXPAT_HASH SHA256=f122a20eada303f904d5e0513326c5b821248f2d4d2afbf5c6f1339e511c0586)
+set(EXPAT_VERSION 2.4.1)
+set(EXPAT_HASH SHA256=CF032D0DBA9B928636548E32B327A2D66B1AAB63C4F4A13DD132C2D1D2F2FB6A)
 
-set(BINUTILS_VERSION 2.34)
-set(BINUTILS_HASH SHA256=f00b0e8803dc9bab1e2165bd568528135be734df3fabf8d0161828cd56028952)
+set(BINUTILS_VERSION 2.36.1)
+set(BINUTILS_HASH SHA256=E81D9EDF373F193AF428A0F256674AEA62A9D74DFE93F65192D4EAE030B0F3B0)
 
-set(GDB_VERSION 9.2)
-set(GDB_HASH SHA256=360cd7ae79b776988e89d8f9a01c985d0b1fa21c767a4295e5f88cb49175c555)
+set(GDB_VERSION 10.2)
+set(GDB_HASH SHA256=AAA1223D534C9B700A8BEC952D9748EE1977513F178727E1BEE520EE000B4F29)
 
 # Branches to fetch the different project targets. Can be overriden from command line.
 set(LIBZIP_TAG master CACHE STRING "libzip branch name, commit id or tag")
@@ -210,7 +210,7 @@ function(toolchain_deps toolchain_deps_dir toolchain_install_dir toolchain_suffi
         )
 
     ExternalProject_add(gmp${suffix}
-        URL http://ftp.gnu.org/gnu/gmp/gmp-${GMP_VERSION}.tar.bz2
+        URL http://ftp.gnu.org/gnu/gmp/gmp-${GMP_VERSION}.tar.xz
         URL_HASH ${GMP_HASH}
         DOWNLOAD_DIR ${DOWNLOAD_DIR}
         CONFIGURE_COMMAND CPPFLAGS=-fexceptions ${compiler_flags} ${wrapper_command} <SOURCE_DIR>/configure
@@ -225,7 +225,7 @@ function(toolchain_deps toolchain_deps_dir toolchain_install_dir toolchain_suffi
 
     ExternalProject_add(mpfr${suffix}
         DEPENDS gmp${suffix}
-        URL http://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VERSION}.tar.bz2
+        URL http://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VERSION}.tar.xz
         URL_HASH ${MPFR_HASH}
         DOWNLOAD_DIR ${DOWNLOAD_DIR}
         CONFIGURE_COMMAND ${compiler_flags} ${wrapper_command} <SOURCE_DIR>/configure
@@ -268,7 +268,7 @@ function(toolchain_deps toolchain_deps_dir toolchain_install_dir toolchain_suffi
         )
 
     ExternalProject_add(expat${suffix}
-        URL https://github.com/libexpat/libexpat/releases/download/R_2_3_0/expat-${EXPAT_VERSION}.tar.bz2
+        URL https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-${EXPAT_VERSION}.tar.xz
         URL_HASH ${EXPAT_HASH}
         DOWNLOAD_DIR ${DOWNLOAD_DIR}
         CONFIGURE_COMMAND ${compiler_flags} ${wrapper_command} <SOURCE_DIR>/configure
