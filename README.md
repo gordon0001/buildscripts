@@ -1,7 +1,11 @@
 ## VitaSDK. How to build.
 
 ```
-apt-get install cmake git build-essential autoconf texinfo bison flex
+git config --global user.name "Your Name"
+git config --global user.email "youremail@yourdomain.com"
+```
+```
+apt-get install cmake git build-essential autoconf texinfo bison flex docbook2x
 ```
 
 ### Native compilation.
